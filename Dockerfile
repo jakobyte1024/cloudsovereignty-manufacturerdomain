@@ -11,7 +11,7 @@ RUN mvn clean package
 FROM open-liberty:kernel
 COPY --from=BUILD /usr/src/app/manufacturedomainEAR/target/*.ear /liberty/usr/servers/defaultServer/apps/manufacturedomainEAR.ear
 COPY --chown=1001:0 resources/liberty/config/server.xml /liberty/usr/servers/defaultServer/server.xml
-RUN (mkdir -p /liberty/usr/shared/resources/postgresql && cd /liberty/usr/shared/resources/postgresql && curl -O https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.14/postgresql-42.2.14.jar)
+RUN (mkdir -p /liberty/usr/shared/resources/postgresql && cd /liberty/usr/shared/resources/postgresql && curl -O https://repo1.maven.org/maven2/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar)
 RUN configure.sh
 COPY --from=BUILD /usr/src/app/migrateAndRunServer.sh /
 COPY --from=FLYWAY_BUILD /build/target/databaseMigrator-0.0.1.jar /app/

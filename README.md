@@ -15,6 +15,21 @@ and could be found under the src folder
 - **de.novatec.showcase.manufacture.controller** - with corresponding REST controllers for Item, Customer and Order
 - **de.novatec.showcase.manufacture.mapper** - with orika mapper fro dto/entity mapping
 
+## Env-Vars of the Docker Image
+
+| Environment Variable      | Description                                        |
+|---------------------------|----------------------------------------------------|
+| HTTP_PORT                 | Port on which the application listens for HTTP requests |
+| HTTPS_PORT                | Port on which the application listens for HTTPS requests |
+| DB_HOST                   | Hostname or IP address of the database server      |
+| DB_PORT                   | Port number for connecting to the database         |
+| DB_SCHEMA                 | Database schema to use                              |
+| DB_NAME                   | Name of the database                                |
+| DB_USER                   | Username for database authentication               |
+| DB_PASSWORD               | Password for database authentication               |
+| SUPPLIER_PURCHASE_URL     | URL endpoint for creating supplier purchases       |
+| SUPPLIER_USER             | Username for authenticating with the supplier API  |
+| SUPPLIER_PASSWORD         | Password for authenticating with the supplier API  |
 
 ## build, run and stop manufacturedomain on an open liberty server
 - **build:** mvn clean install
@@ -51,4 +66,3 @@ The smoketest.sh script consist of two sub scripts - the setup-db.sh and busines
 
 ## openAPI
 check [openAPI](http://localhost:9080/api/explorer/) if the server is running for the API documentation of the manufacture domain
-

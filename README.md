@@ -1,4 +1,4 @@
-# technologyconsulting-showcase-manufacturedomain
+# cloudsovereignty-showcase-manufacturedomain
 manufacturedomain is a part of a showcase implementation which is running on a open liberty instance. It is structured right now like this
 
 - **manufacturedomainParent** Parent maven module
@@ -15,7 +15,7 @@ and could be found under the src folder
 - **de.novatec.showcase.manufacture.controller** - with corresponding REST controllers for Item, Customer and Order
 - **de.novatec.showcase.manufacture.mapper** - with orika mapper fro dto/entity mapping
 
-## Env-Vars of the Docker Image
+## Environment Variables
 
 | Environment Variable      | Description                                        |
 |---------------------------|----------------------------------------------------|

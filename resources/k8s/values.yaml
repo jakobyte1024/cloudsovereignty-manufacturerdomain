@@ -1,6 +1,6 @@
 app: 
   image:
-    repository: novatec/technologyconsulting-showcase-manufacturedomain
+    repository: 4096mm/cloudsovereignty-manufacturerdomain
     tag: 
   appconfig:
     httpport: 9080

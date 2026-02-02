@@ -2,11 +2,6 @@ name: Deploy to AKS
 
 on:
   workflow_dispatch:
-
-  workflow_run:
-    workflows: ["Build and push to Dockerhub"]
-    types:
-      - completed    
       
 jobs:
   deployToAks:

@@ -11,6 +11,8 @@
 				value="create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode"
 				value="both" />
+			<property name="eclipselink.session-event-listener"
+					  value="de.novatec.showcase.manufacture.ejb.encryptor.BomBatchDecryptSessionListener"/>
 		</properties>
 	</persistence-unit>
 </persistence>

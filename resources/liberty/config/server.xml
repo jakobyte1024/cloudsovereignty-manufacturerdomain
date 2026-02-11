@@ -5,7 +5,7 @@
 	</featureManager>
 
 	<logging traceSpecification="*" consoleLogLevel="info"/>
-	
+
 	<httpAccessLogging id="accessLogging"/>
 	<httpEndpoint accessLoggingRef="accessLogging" host="0.0.0.0" httpPort="${env.HTTP_PORT}" httpsPort="${env.HTTPS_PORT}" id="defaultHttpEndpoint" />
 
@@ -21,24 +21,24 @@
 			includes="h2-1.4.200.jar" />
 	</library>
 
-	<jdbcDriver id="postgresql" 
-		javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource" 
-		javax.sql.XADataSource="org.postgresql.xa.PGXADataSource" 
+	<jdbcDriver id="postgresql"
+		javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource"
+		javax.sql.XADataSource="org.postgresql.xa.PGXADataSource"
 		libraryRef="psql-lib" />
 	<library id="psql-lib">
 		<file name="${shared.resource.dir}/postgresql/postgresql-42.6.0.jar"/>
 	</library>
 
-	<dataSource id="psql-db" 
+	<dataSource id="psql-db"
 				jndiName="jdbc/manufacture_db"
-				type="javax.sql.DataSource" 
+				type="javax.sql.DataSource"
 				jdbcDriverRef="postgresql">
-		<properties.postgresql 	databaseName="${env.DB_NAME}" 
+		<properties.postgresql 	databaseName="${env.DB_NAME}"
 								currentSchema="${env.DB_SCHEMA}"
-								portNumber="${env.DB_PORT}" 
-								serverName="${env.DB_HOST}" 
+								portNumber="${env.DB_PORT}"
+								serverName="${env.DB_HOST}"
 								user="${env.DB_USER}"
-								password="${env.DB_PASSWORD}" 
+								password="${env.DB_PASSWORD}"
 		/>
 	</dataSource>
 
@@ -50,6 +50,10 @@
 	<jndiEntry jndiName="supplierdomain.purchase.url" value="${env.SUPPLIER_PURCHASE_URL}"/>
 	<jndiEntry jndiName="supplierdomain.username" value="${env.SUPPLIER_USER}"/>
 	<jndiEntry jndiName="supplierdomain.password" value="${env.SUPPLIER_PASSWORD}"/>
+
+	<jndiEntry jndiName="encryptionproxy.url.encrypt" value="${env.ENCRYPTIONPROXY_URL_ENCRYPT}"/>
+	<jndiEntry jndiName="encryptionproxy.url.decrypt" value="${env.ENCRYPTIONPROXY_URL_DECRYPT}"/>
+	<jndiEntry jndiName="encryptionproxy.secret" value="${env.ENCRYPTIONPROXY_SECRET}"/>
 
 	<basicRegistry id="basic" realm="defaultRealm">
 		<user name="admin" password="adminpwd" />
@@ -80,6 +84,8 @@
 				<group name="MANUFACTUREDOMAIN.ADMIN" />
 			</security-role>
 		</application-bnd>
+
+		<classloader apiTypeVisibility="spec, ibm-api, api, third-party" />
 	</enterpriseApplication>
 
 </server>

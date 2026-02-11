@@ -1,14 +1,14 @@
 package de.novatec.showcase.manufacture.ejb.session;
 
-import java.util.Collection;
-
-import de.novatec.showcase.manufacture.client.supplier.RestcallException;
+import de.novatec.showcase.manufacture.client.RestcallException;
 import de.novatec.showcase.manufacture.ejb.entity.WorkOrder;
 import de.novatec.showcase.manufacture.ejb.entity.WorkOrderStatus;
 import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
 import de.novatec.showcase.manufacture.ejb.session.exception.InventoryHasNotEnoughPartsException;
 import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
 import de.novatec.showcase.manufacture.ejb.session.exception.WorkOrderNotFoundException;
+
+import java.util.Collection;
 
 public interface WorkOrderService {
 	public WorkOrder findWorkOrder(Integer workOrderID) throws WorkOrderNotFoundException;

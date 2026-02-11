@@ -1,14 +1,8 @@
 package de.novatec.showcase.manufacture.ejb.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue(value = "1")

@@ -1,7 +1,14 @@
 package de.novatec.showcase.manufacture.client.supplier;
 
-import java.util.Collection;
-import java.util.List;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import de.novatec.showcase.manufacture.client.RestcallException;
+import de.novatec.showcase.manufacture.dto.ComponentDemands;
+import de.novatec.showcase.manufacture.dto.PurchaseOrder;
+import de.novatec.showcase.manufacture.ejb.entity.ComponentDemand;
+import de.novatec.showcase.manufacture.mapper.DtoMapper;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.ManagedBean;
 import javax.naming.InitialContext;
@@ -14,17 +21,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
-import de.novatec.showcase.manufacture.dto.ComponentDemands;
-import de.novatec.showcase.manufacture.dto.PurchaseOrder;
-import de.novatec.showcase.manufacture.ejb.entity.ComponentDemand;
-import de.novatec.showcase.manufacture.mapper.DtoMapper;
+import java.util.Collection;
+import java.util.List;
 
 @ManagedBean
 public class ComponentDemandPurchaser {

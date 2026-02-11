@@ -1,24 +1,21 @@
 package de.novatec.showcase.manufacture.ejb.entity;
 
-import java.util.Objects;
+import de.novatec.showcase.manufacture.ejb.encryptor.BomDescriptorListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.*;
+import java.util.Objects;
 
 
 @Table(name = "M_BOM")
 @Entity
 @IdClass(BomPK.class)
 @NamedQuery(name = Bom.ALL_BOMS, query = Bom.ALL_BOMS_QUERY)
+@EntityListeners(BomDescriptorListener.class)
 public class Bom {
+
+	private static final Logger LOG = LoggerFactory.getLogger(Bom.class);
 
 	public static final String  ALL_BOMS = "ALL_BOMS";
 	
@@ -35,19 +32,34 @@ public class Bom {
 	@Id
 	@Column(name = "B_LINE_NO", nullable = false)
 	private int lineNo;
-	
-	@Column(name="B_QTY")
-	private int quantity;
+
+	@Column(name = "DEK")
+	private String dataEncryptionKeyEncrypted;
+
+	@Transient
+	private byte[] dataEncryptionKey; // decrypted value
+
+	@Column(name = "B_QTY")
+	private String quantityEncrypted;
+
+	@Transient
+	private int quantity; // decrypted value
 	
 	@Column(name="B_ENG_CHANGE", length = 10)
+	private String engChangeEncrypted;
+
+	@Transient
 	private String engChange;
 	
 	@Column(name="B_OPS")
 	private int opsNo;
-	
+
 	@Column(name="B_OPS_DESC", length = 100)
+	private String opsDescEncrypted;
+
+	@Transient
 	private String opsDesc;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="B_COMP_ID",insertable=false,updatable=false)
 	private Component component;
@@ -187,5 +199,45 @@ public class Bom {
 		return "Bom [componentId=" + componentId + ", assemblyId=" + assemblyId + ", lineNo=" + lineNo + ", quantity="
 				+ quantity + ", engChange=" + engChange + ", opsNo=" + opsNo + ", opsDesc=" + opsDesc + ", version="
 				+ version + "]";
+	}
+
+	public String getDataEncryptionKeyEncrypted() {
+		return dataEncryptionKeyEncrypted;
+	}
+
+	public void setDataEncryptionKeyEncrypted(String dataEncryptionKeyEncrypted) {
+		this.dataEncryptionKeyEncrypted = dataEncryptionKeyEncrypted;
+	}
+
+	public byte[] getDataEncryptionKey() {
+		return dataEncryptionKey;
+	}
+
+	public void setDataEncryptionKey(byte[] dataEncryptionKey) {
+		this.dataEncryptionKey = dataEncryptionKey;
+	}
+
+	public String getQuantityEncrypted() {
+		return quantityEncrypted;
+	}
+
+	public void setQuantityEncrypted(String quantityEncrypted) {
+		this.quantityEncrypted = quantityEncrypted;
+	}
+
+	public String getEngChangeEncrypted() {
+		return engChangeEncrypted;
+	}
+
+	public void setEngChangeEncrypted(String engChangeEncrypted) {
+		this.engChangeEncrypted = engChangeEncrypted;
+	}
+
+	public String getOpsDescEncrypted() {
+		return opsDescEncrypted;
+	}
+
+	public void setOpsDescEncrypted(String opsDescEncrypted) {
+		this.opsDescEncrypted = opsDescEncrypted;
 	}
 }

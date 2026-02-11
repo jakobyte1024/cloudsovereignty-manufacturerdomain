@@ -59,51 +59,51 @@ C_SEQ	24
 -- Data for Name: m_bom; Type: TABLE DATA; Schema: public; Owner: manufacture_user
 --
 
-COPY public.m_bom (b_comp_id, b_line_no, b_assembly_id, b_eng_change, b_ops_desc, b_ops, b_qty, b_version) FROM stdin;
-1	1	4	engChange	description	1	4	1
-2	2	4	engChange	description	1	2	1
-3	3	4	engChange	description	1	2	1
-1	1	5	engChange	description	1	2	1
-2	2	5	engChange	description	1	4	1
-1	1	6	engChange	description	1	2	1
-3	2	6	engChange	description	1	4	1
-1	1	7	engChange	description	1	2	1
-3	2	7	engChange	description	1	4	1
-1	1	8	engChange	description	1	2	1
-3	2	8	engChange	description	1	4	1
-1	1	9	engChange	description	1	2	1
-3	2	9	engChange	description	1	4	1
-1	1	10	engChange	description	1	2	1
-3	2	10	engChange	description	1	4	1
-1	1	11	engChange	description	1	2	1
-3	2	11	engChange	description	1	4	1
-1	1	12	engChange	description	1	2	1
-3	2	12	engChange	description	1	4	1
-1	1	13	engChange	description	1	2	1
-3	2	13	engChange	description	1	4	1
-1	1	14	engChange	description	1	2	1
-3	2	14	engChange	description	1	4	1
-1	1	15	engChange	description	1	2	1
-3	2	15	engChange	description	1	4	1
-1	1	16	engChange	description	1	2	1
-3	2	16	engChange	description	1	4	1
-1	1	17	engChange	description	1	2	1
-3	2	17	engChange	description	1	4	1
-1	1	18	engChange	description	1	2	1
-3	2	18	engChange	description	1	4	1
-1	1	19	engChange	description	1	2	1
-3	2	19	engChange	description	1	4	1
-1	1	20	engChange	description	1	2	1
-3	2	20	engChange	description	1	4	1
-1	1	21	engChange	description	1	2	1
-3	2	21	engChange	description	1	4	1
-1	1	22	engChange	description	1	2	1
-3	2	22	engChange	description	1	4	1
-1	1	23	engChange	description	1	2	1
-3	2	23	engChange	description	1	4	1
-1	1	24	engChange	description	1	2	1
-3	2	24	engChange	description	1	4	1
-\.
+--- COPY public.m_bom (b_comp_id, b_line_no, b_assembly_id, b_eng_change, b_ops_desc, b_ops, b_qty, b_version) FROM stdin;
+--- 1	1	4	engChange	description	1	4	1
+--- 2	2	4	engChange	description	1	2	1
+--- 3	3	4	engChange	description	1	2	1
+--- 1	1	5	engChange	description	1	2	1
+--- 2	2	5	engChange	description	1	4	1
+--- 1	1	6	engChange	description	1	2	1
+--- 3	2	6	engChange	description	1	4	1
+--- 1	1	7	engChange	description	1	2	1
+--- 3	2	7	engChange	description	1	4	1
+--- 1	1	8	engChange	description	1	2	1
+--- 3	2	8	engChange	description	1	4	1
+--- 1	1	9	engChange	description	1	2	1
+--- 3	2	9	engChange	description	1	4	1
+--- 1	1	10	engChange	description	1	2	1
+--- 3	2	10	engChange	description	1	4	1
+--- 1	1	11	engChange	description	1	2	1
+--- 3	2	11	engChange	description	1	4	1
+--- 1	1	12	engChange	description	1	2	1
+--- 3	2	12	engChange	description	1	4	1
+--- 1	1	13	engChange	description	1	2	1
+--- 3	2	13	engChange	description	1	4	1
+--- 1	1	14	engChange	description	1	2	1
+--- 3	2	14	engChange	description	1	4	1
+--- 1	1	15	engChange	description	1	2	1
+--- 3	2	15	engChange	description	1	4	1
+--- 1	1	16	engChange	description	1	2	1
+--- 3	2	16	engChange	description	1	4	1
+--- 1	1	17	engChange	description	1	2	1
+--- 3	2	17	engChange	description	1	4	1
+--- 1	1	18	engChange	description	1	2	1
+--- 3	2	18	engChange	description	1	4	1
+--- 1	1	19	engChange	description	1	2	1
+--- 3	2	19	engChange	description	1	4	1
+--- 1	1	20	engChange	description	1	2	1
+--- 3	2	20	engChange	description	1	4	1
+--- 1	1	21	engChange	description	1	2	1
+--- 3	2	21	engChange	description	1	4	1
+--- 1	1	22	engChange	description	1	2	1
+--- 3	2	22	engChange	description	1	4	1
+--- 1	1	23	engChange	description	1	2	1
+--- 3	2	23	engChange	description	1	4	1
+--- 1	1	24	engChange	description	1	2	1
+--- 3	2	24	engChange	description	1	4	1
+--- \.
 
 
 --

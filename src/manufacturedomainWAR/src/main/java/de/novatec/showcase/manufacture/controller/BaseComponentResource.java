@@ -1,22 +1,13 @@
 package de.novatec.showcase.manufacture.controller;
 
-import java.util.Collection;
-
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJB;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
+import de.novatec.showcase.manufacture.GlobalConstants;
+import de.novatec.showcase.manufacture.dto.*;
+import de.novatec.showcase.manufacture.ejb.session.ManufactureSessionLocal;
+import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.BomNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.ComponentNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
+import de.novatec.showcase.manufacture.mapper.DtoMapper;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -28,18 +19,16 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 
-import de.novatec.showcase.manufacture.GlobalConstants;
-import de.novatec.showcase.manufacture.dto.Assembly;
-import de.novatec.showcase.manufacture.dto.Bom;
-import de.novatec.showcase.manufacture.dto.BomPK;
-import de.novatec.showcase.manufacture.dto.ComponentDemands;
-import de.novatec.showcase.manufacture.dto.Inventory;
-import de.novatec.showcase.manufacture.ejb.session.ManufactureSessionLocal;
-import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.BomNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.ComponentNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
-import de.novatec.showcase.manufacture.mapper.DtoMapper;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJB;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.Collection;
 
 @RolesAllowed({ GlobalConstants.ADMIN_ROLE_NAME, GlobalConstants.COMPONENT_READ_ROLE_NAME })
 public abstract class BaseComponentResource {

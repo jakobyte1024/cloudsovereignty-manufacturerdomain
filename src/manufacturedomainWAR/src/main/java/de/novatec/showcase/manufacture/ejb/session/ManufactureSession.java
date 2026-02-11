@@ -1,27 +1,20 @@
 package de.novatec.showcase.manufacture.ejb.session;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import de.novatec.showcase.manufacture.ejb.entity.*;
+import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.BomNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.ComponentNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import de.novatec.showcase.manufacture.ejb.entity.Assembly;
-import de.novatec.showcase.manufacture.ejb.entity.Bom;
-import de.novatec.showcase.manufacture.ejb.entity.BomPK;
-import de.novatec.showcase.manufacture.ejb.entity.Component;
-import de.novatec.showcase.manufacture.ejb.entity.ComponentDemand;
-import de.novatec.showcase.manufacture.ejb.entity.Inventory;
-import de.novatec.showcase.manufacture.ejb.entity.InventoryPK;
-import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.BomNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.ComponentNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NEVER)
@@ -75,7 +68,8 @@ public class ManufactureSession implements ManufactureSessionLocal {
 
 	@Override
 	public Collection<Bom> getAllBoms() {
-		return em.createNamedQuery(Bom.ALL_BOMS, Bom.class).getResultList();
+		List<Bom> boms = em.createNamedQuery(Bom.ALL_BOMS, Bom.class).getResultList();
+		return boms;
 	}
 
 	@Override

@@ -1,9 +1,15 @@
 package de.novatec.showcase.manufacture.ejb.session;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import de.novatec.showcase.manufacture.client.RestcallException;
+import de.novatec.showcase.manufacture.client.supplier.ComponentDemandPurchaser;
+import de.novatec.showcase.manufacture.dto.PurchaseOrder;
+import de.novatec.showcase.manufacture.ejb.entity.*;
+import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.InventoryHasNotEnoughPartsException;
+import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
+import de.novatec.showcase.manufacture.ejb.session.exception.WorkOrderNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -13,23 +19,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import de.novatec.showcase.manufacture.client.supplier.ComponentDemandPurchaser;
-import de.novatec.showcase.manufacture.client.supplier.RestcallException;
-import de.novatec.showcase.manufacture.dto.PurchaseOrder;
-import de.novatec.showcase.manufacture.ejb.entity.Assembly;
-import de.novatec.showcase.manufacture.ejb.entity.Bom;
-import de.novatec.showcase.manufacture.ejb.entity.ComponentDemand;
-import de.novatec.showcase.manufacture.ejb.entity.Inventory;
-import de.novatec.showcase.manufacture.ejb.entity.WorkOrder;
-import de.novatec.showcase.manufacture.ejb.entity.WorkOrderStatus;
-import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.InventoryHasNotEnoughPartsException;
-import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
-import de.novatec.showcase.manufacture.ejb.session.exception.WorkOrderNotFoundException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NEVER)

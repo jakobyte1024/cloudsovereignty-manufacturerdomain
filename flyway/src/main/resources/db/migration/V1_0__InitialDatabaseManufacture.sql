@@ -28,11 +28,12 @@ CREATE TABLE public.m_bom (
     b_comp_id character varying(20) NOT NULL,
     b_line_no integer NOT NULL,
     b_assembly_id character varying(20) NOT NULL,
-    b_eng_change character varying(10),
-    b_ops_desc character varying(100),
+    b_eng_change character varying(250),
+    b_ops_desc character varying(250),
     b_ops integer,
-    b_qty integer,
-    b_version integer
+    b_qty character varying(250),
+    b_version integer,
+    dek character varying(250)
 );
 
 

@@ -1,19 +1,12 @@
 package de.novatec.showcase.manufacture.mapper;
 
-import java.util.Collection;
-import java.util.List;
-
-import de.novatec.showcase.manufacture.dto.Assembly;
-import de.novatec.showcase.manufacture.dto.Bom;
-import de.novatec.showcase.manufacture.dto.BomPK;
-import de.novatec.showcase.manufacture.dto.Component;
-import de.novatec.showcase.manufacture.dto.ComponentDemand;
-import de.novatec.showcase.manufacture.dto.Inventory;
-import de.novatec.showcase.manufacture.dto.WorkOrder;
-import de.novatec.showcase.manufacture.dto.WorkOrderStatus;
+import de.novatec.showcase.manufacture.dto.*;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+
+import java.util.Collection;
+import java.util.List;
 
 abstract public class DtoMapper {
 	private static MapperFactory mapperFactory;

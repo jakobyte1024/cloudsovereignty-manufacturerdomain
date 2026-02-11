@@ -1,18 +1,13 @@
 package de.novatec.showcase.manufacture.ejb.session;
 
-import java.util.Collection;
-import java.util.List;
-
-import de.novatec.showcase.manufacture.ejb.entity.Assembly;
-import de.novatec.showcase.manufacture.ejb.entity.Bom;
-import de.novatec.showcase.manufacture.ejb.entity.BomPK;
-import de.novatec.showcase.manufacture.ejb.entity.Component;
-import de.novatec.showcase.manufacture.ejb.entity.ComponentDemand;
-import de.novatec.showcase.manufacture.ejb.entity.Inventory;
+import de.novatec.showcase.manufacture.ejb.entity.*;
 import de.novatec.showcase.manufacture.ejb.session.exception.AssemblyNotFoundException;
 import de.novatec.showcase.manufacture.ejb.session.exception.BomNotFoundException;
 import de.novatec.showcase.manufacture.ejb.session.exception.ComponentNotFoundException;
 import de.novatec.showcase.manufacture.ejb.session.exception.InventoryNotFoundException;
+
+import java.util.Collection;
+import java.util.List;
 
 public interface ManufactureService {
 	Component findComponent(String id) throws ComponentNotFoundException;

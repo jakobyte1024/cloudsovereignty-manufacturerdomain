@@ -1,4 +1,4 @@
-package de.novatec.showcase.manufacture.client.supplier;
+package de.novatec.showcase.manufacture.client;
 
 import javax.ejb.ApplicationException;
 

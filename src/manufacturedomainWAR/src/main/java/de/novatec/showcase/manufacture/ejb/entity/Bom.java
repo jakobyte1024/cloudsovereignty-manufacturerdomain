@@ -1,21 +1,17 @@
 package de.novatec.showcase.manufacture.ejb.entity;
 
-import de.novatec.showcase.manufacture.ejb.encryptor.BomDescriptorListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.novatec.showcase.manufacture.utils.EncryptionUtils;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-
 
 @Table(name = "M_BOM")
 @Entity
 @IdClass(BomPK.class)
 @NamedQuery(name = Bom.ALL_BOMS, query = Bom.ALL_BOMS_QUERY)
-@EntityListeners(BomDescriptorListener.class)
-public class Bom {
-
-	private static final Logger LOG = LoggerFactory.getLogger(Bom.class);
+public class Bom extends AbstractEncryptedEntity {
 
 	public static final String  ALL_BOMS = "ALL_BOMS";
 	
@@ -33,12 +29,6 @@ public class Bom {
 	@Column(name = "B_LINE_NO", nullable = false)
 	private int lineNo;
 
-	@Column(name = "DEK")
-	private String dataEncryptionKeyEncrypted;
-
-	@Transient
-	private byte[] dataEncryptionKey; // decrypted value
-
 	@Column(name = "B_QTY")
 	private String quantityEncrypted;
 
@@ -49,7 +39,7 @@ public class Bom {
 	private String engChangeEncrypted;
 
 	@Transient
-	private String engChange;
+	private String engChange; // decrypted value
 	
 	@Column(name="B_OPS")
 	private int opsNo;
@@ -58,7 +48,7 @@ public class Bom {
 	private String opsDescEncrypted;
 
 	@Transient
-	private String opsDesc;
+	private String opsDesc;  // decrypted value
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="B_COMP_ID",insertable=false,updatable=false)
@@ -201,43 +191,26 @@ public class Bom {
 				+ version + "]";
 	}
 
-	public String getDataEncryptionKeyEncrypted() {
-		return dataEncryptionKeyEncrypted;
+	@Override
+	public void encryptData(byte[] dek) {
+		quantityEncrypted = EncryptionUtils.encryptWithDEK(dek, Integer.toString(quantity));
+		engChangeEncrypted = EncryptionUtils.encryptWithDEK(dek, engChange);
+		opsDescEncrypted = EncryptionUtils.encryptWithDEK(dek, opsDesc);
 	}
 
-	public void setDataEncryptionKeyEncrypted(String dataEncryptionKeyEncrypted) {
-		this.dataEncryptionKeyEncrypted = dataEncryptionKeyEncrypted;
+	@Override
+	public void decryptData(byte[] dek) {
+		quantity = Integer.parseInt(EncryptionUtils.decryptWithDEK(dek, quantityEncrypted));
+		engChange = EncryptionUtils.decryptWithDEK(dek, engChangeEncrypted);
+		opsDesc = EncryptionUtils.decryptWithDEK(dek, opsDescEncrypted);
 	}
 
-	public byte[] getDataEncryptionKey() {
-		return dataEncryptionKey;
-	}
-
-	public void setDataEncryptionKey(byte[] dataEncryptionKey) {
-		this.dataEncryptionKey = dataEncryptionKey;
-	}
-
-	public String getQuantityEncrypted() {
-		return quantityEncrypted;
-	}
-
-	public void setQuantityEncrypted(String quantityEncrypted) {
-		this.quantityEncrypted = quantityEncrypted;
-	}
-
-	public String getEngChangeEncrypted() {
-		return engChangeEncrypted;
-	}
-
-	public void setEngChangeEncrypted(String engChangeEncrypted) {
-		this.engChangeEncrypted = engChangeEncrypted;
-	}
-
-	public String getOpsDescEncrypted() {
-		return opsDescEncrypted;
-	}
-
-	public void setOpsDescEncrypted(String opsDescEncrypted) {
-		this.opsDescEncrypted = opsDescEncrypted;
+	@Override
+	public Map<String, Object> getEncryptionMetadata() {
+		return new HashMap<String, Object>() {{
+			put("lineNo", lineNo);
+			put("assemblyId", assemblyId);
+			put("componentId", componentId);
+		}};
 	}
 }

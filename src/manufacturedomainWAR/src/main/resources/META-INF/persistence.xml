@@ -12,7 +12,7 @@
 			<property name="eclipselink.ddl-generation.output-mode"
 				value="both" />
 			<property name="eclipselink.session-event-listener"
-					  value="de.novatec.showcase.manufacture.ejb.encryptor.BomBatchDecryptSessionListener"/>
+					  value="de.novatec.showcase.manufacture.ejb.encryptor.EncryptedEntitySessionListener"/>
 		</properties>
 	</persistence-unit>
 </persistence>

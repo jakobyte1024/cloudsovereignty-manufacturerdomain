@@ -39,7 +39,6 @@
 			<groupId>javax.persistence</groupId>
 			<artifactId>javax.persistence-api</artifactId>
 			<version>2.2</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -86,9 +85,15 @@
 
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>eclipselink</artifactId>
-			<version>2.7.16</version> <!-- match Liberty version -->
-			<scope>provided</scope>
+			<artifactId>org.eclipse.persistence.core</artifactId>
+			<version>2.7.16</version>
+			<scope>compile</scope> </dependency>
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.jpa</artifactId>
+			<version>2.7.16</version>
+			<scope>compile</scope>
 		</dependency>
 		
 	</dependencies>

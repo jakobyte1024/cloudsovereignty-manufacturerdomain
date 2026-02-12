@@ -84,8 +84,5 @@
 				<group name="MANUFACTUREDOMAIN.ADMIN" />
 			</security-role>
 		</application-bnd>
-
-		<classloader apiTypeVisibility="spec, ibm-api, api, third-party" />
 	</enterpriseApplication>
-
 </server>

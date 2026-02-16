@@ -4,6 +4,7 @@ import de.novatec.showcase.manufacture.client.encryption.CiphertextResponse;
 import de.novatec.showcase.manufacture.client.encryption.EncryptionRequest;
 import de.novatec.showcase.manufacture.client.encryption.EncryptionServiceClient;
 import de.novatec.showcase.manufacture.ejb.entity.AbstractEncryptedEntity;
+import de.novatec.showcase.manufacture.utils.EncryptionConfig;
 import de.novatec.showcase.manufacture.utils.EncryptionUtils;
 
 import javax.persistence.PrePersist;
@@ -44,7 +45,7 @@ public class EncryptedEntityDescriptorListener {
     @PrePersist
     @PreUpdate
     public void encrypt(Object entity) {
-        // 1. Check if this is an entity we know how to handle
+        // Check if this is an entity we know how to handle
         if (!(entity instanceof AbstractEncryptedEntity)) {
             return;
         }
@@ -65,8 +66,8 @@ public class EncryptedEntityDescriptorListener {
             batch.add(new EncryptionRequest.ItemWithMetadata(dataEncryptionKey, metadata));
 
             EncryptionRequest request = EncryptionRequest.fromBatch(
-                    "vault",  // KEK provider
-                    "kek",              // KEK key name
+                    EncryptionConfig.getKekProvider(encryptedEntity.getClass()),
+                    EncryptionConfig.getKekKeyName(encryptedEntity.getClass()),
                     null,               // optional key version (null = latest)
                     batch               // DEK batch
             );

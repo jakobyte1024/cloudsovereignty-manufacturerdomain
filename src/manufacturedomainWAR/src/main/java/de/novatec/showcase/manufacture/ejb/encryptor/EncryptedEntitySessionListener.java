@@ -6,6 +6,8 @@ import de.novatec.showcase.manufacture.client.decryption.DecryptionServiceClient
 import de.novatec.showcase.manufacture.client.decryption.DecryptionServiceNotConfiguredException;
 import de.novatec.showcase.manufacture.client.decryption.PlaintextResponse;
 import de.novatec.showcase.manufacture.ejb.entity.AbstractEncryptedEntity;
+import de.novatec.showcase.manufacture.utils.EncryptionConfig;
+
 import org.eclipse.persistence.queries.ReadQuery;
 import org.eclipse.persistence.sessions.SessionEvent;
 import org.eclipse.persistence.sessions.SessionEventAdapter;
@@ -87,8 +89,8 @@ public class EncryptedEntitySessionListener extends SessionEventAdapter {
         }
 
         DecryptionBatchRequest dekRequest = new DecryptionBatchRequest();
-        dekRequest.setKeyProvider("vault");
-        dekRequest.setKeyName("kek");
+        dekRequest.setKeyProvider(EncryptionConfig.getKekProvider(entities.get(0).getClass()));
+        dekRequest.setKeyName(EncryptionConfig.getKekKeyName(entities.get(0).getClass()));
         dekRequest.setData(batchInputs);
 
         // call decryption-service

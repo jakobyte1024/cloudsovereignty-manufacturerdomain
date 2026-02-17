@@ -12,6 +12,7 @@ import org.eclipse.persistence.queries.ReadQuery;
 import org.eclipse.persistence.sessions.SessionEvent;
 import org.eclipse.persistence.sessions.SessionEventAdapter;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,14 +20,19 @@ import java.util.List;
 
 public class EncryptedEntitySessionListener extends SessionEventAdapter {
 
-    private static final DecryptionServiceClient CLIENT;
+    private volatile DecryptionServiceClient _client;
 
-    static {
-        try {
-            CLIENT = new DecryptionServiceClient();
-        } catch (DecryptionServiceNotConfiguredException e) {
-            throw new RuntimeException("Encryption Service not configured", e);
+    private DecryptionServiceClient getClient() {
+        if (_client == null) {
+            synchronized (this) {
+                if (_client == null) {
+                    _client = CDI.current()
+                            .select(DecryptionServiceClient.class)
+                            .get();
+                }
+            }
         }
+        return _client;
     }
 
     @Override
@@ -96,13 +102,14 @@ public class EncryptedEntitySessionListener extends SessionEventAdapter {
         // call decryption-service
         List<PlaintextResponse> dekDecrypted;
         try {
-            dekDecrypted = CLIENT.decryptBatch(dekRequest);
+            dekDecrypted = getClient().decryptBatch(dekRequest);
         } catch (Exception e) {
             throw new RuntimeException("Remote decryption service failed", e);
         }
 
         if (dekDecrypted.size() != size) {
-            throw new PersistenceException("Decryption service returned mismatched result count. Sent: " + size + ", Received: " + dekDecrypted.size());
+            throw new PersistenceException("Decryption service returned mismatched result count. Sent: " + size
+                    + ", Received: " + dekDecrypted.size());
         }
 
         // apply decryption to entity data

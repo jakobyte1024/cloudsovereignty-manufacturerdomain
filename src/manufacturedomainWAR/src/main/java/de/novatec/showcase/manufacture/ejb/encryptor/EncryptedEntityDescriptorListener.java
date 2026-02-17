@@ -1,5 +1,6 @@
 package de.novatec.showcase.manufacture.ejb.encryptor;
 
+import de.novatec.showcase.manufacture.client.decryption.DecryptionServiceClient;
 import de.novatec.showcase.manufacture.client.encryption.CiphertextResponse;
 import de.novatec.showcase.manufacture.client.encryption.EncryptionRequest;
 import de.novatec.showcase.manufacture.client.encryption.EncryptionServiceClient;
@@ -7,6 +8,7 @@ import de.novatec.showcase.manufacture.ejb.entity.AbstractEncryptedEntity;
 import de.novatec.showcase.manufacture.utils.EncryptionConfig;
 import de.novatec.showcase.manufacture.utils.EncryptionUtils;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.util.ArrayList;
@@ -18,28 +20,20 @@ public class EncryptedEntityDescriptorListener {
 
     private volatile EncryptionServiceClient _client;
 
-    public EncryptedEntityDescriptorListener() {}
-
-    /**
-     * Thread-safe accessor using Double-Checked Locking
-     */
     private EncryptionServiceClient getClient() {
-        EncryptionServiceClient localRef = _client;
-        if (localRef == null) {
+        if (_client == null) {
             synchronized (this) {
-                localRef = _client;
-                if (localRef == null) {
-                    try {
-                        localRef = new EncryptionServiceClient();
-                        _client = localRef;
-                    } catch (Exception e) {
-                        throw new RuntimeException("Failed to initialize EncryptionServiceClient", e);
-                    }
+                if (_client == null) {
+                    _client = CDI.current()
+                            .select(EncryptionServiceClient.class)
+                            .get();
                 }
             }
         }
+        return _client;
+    }
 
-        return localRef;
+    public EncryptedEntityDescriptorListener() {
     }
 
     @PrePersist
@@ -68,8 +62,8 @@ public class EncryptedEntityDescriptorListener {
             EncryptionRequest request = EncryptionRequest.fromBatch(
                     EncryptionConfig.getKekProvider(encryptedEntity.getClass()),
                     EncryptionConfig.getKekKeyName(encryptedEntity.getClass()),
-                    null,               // optional key version (null = latest)
-                    batch               // DEK batch
+                    null, // optional key version (null = latest)
+                    batch // DEK batch
             );
 
             List<CiphertextResponse> responses = client.encrypt(request);

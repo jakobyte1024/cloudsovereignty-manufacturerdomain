@@ -8,6 +8,11 @@ app:
     SUPPLIER_PURCHASE_URL: http://supplierdomain-service/supplierdomain/supplier/purchase/
     SUPPLIER_USER: admin
     SUPPLIER_PASSWORD: adminpwd
+    ENCRYPTIONPROXY_ENCRYPTION_URL: http://encryptionproxy-service/api/v1/encrypt
+    ENCRYPTIONPROXY_DECRYPTION_URL: http://encryptionproxy-service/api/v1/decrypt
+    ENCRYPTIONPROXY_SECRET: demo
+    KEK_PROVIDER_BOM:
+    KEK_KEYNAME_BOM:
   dbconfig:
     host: 
     port: "5432"

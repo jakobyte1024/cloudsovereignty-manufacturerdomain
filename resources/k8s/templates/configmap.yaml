@@ -5,4 +5,8 @@ metadata:
 data:
   HTTP_PORT: {{ .Values.app.appconfig.httpport | quote }}
   HTTPS_PORT: {{ .Values.app.appconfig.httpsport | quote }}
-  SUPPLIER_PURCHASE_URL: {{ .Values.app.appconfig.SUPPLIER_PURCHASE_URL }}
+  SUPPLIER_PURCHASE_URL: {{ .Values.app.appconfig.SUPPLIER_PURCHASE_URL | quote }}
+  ENCRYPTIONPROXY_URL_ENCRYPT: {{ .Values.app.appconfig.ENCRYPTIONPROXY_ENCRYPTION_URL | quote }}
+  ENCRYPTIONPROXY_URL_DECRYPT: {{ .Values.app.appconfig.ENCRYPTIONPROXY_DECRYPTION_URL | quote }}
+  KEK_PROVIDER_BOM: {{ .Values.app.appconfig.KEK_PROVIDER_BOM | quote }}
+  KEK_KEYNAME_BOM: {{ .Values.app.appconfig.KEK_KEYNAME_BOM | quote}}
